@@ -1,11 +1,16 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import customFetch from '../../../utils/axios';
+import {
+	addUserToLocalStorage,
+	getUserFromLocalStorage,
+	removeUserFromLocalStorage
+} from '../../../utils/localStorage';
 
 const initialState = {
 	isLoading: false,
 	isSidebarOpen: false,
-	user: ''
+	user: getUserFromLocalStorage()
 };
 
 export const registerUser = createAsyncThunk(
@@ -13,7 +18,6 @@ export const registerUser = createAsyncThunk(
 	async (user, thunkAPI) => {
 		try {
 			const response = await customFetch.post('/auth/register', user);
-			console.log({ response });
 			return response.data;
 		} catch (error) {
 			return thunkAPI.rejectWithValue(error.response.data.msg);
@@ -24,7 +28,12 @@ export const registerUser = createAsyncThunk(
 export const loginUser = createAsyncThunk(
 	'user/loginUser',
 	async (user, thunkAPI) => {
-		console.log('loginUser', { user });
+		try {
+			const response = await customFetch.post('/auth/login', user);
+			return response.data;
+		} catch (error) {
+			return thunkAPI.rejectWithValue(error.response.data.msg);
+		}
 	}
 );
 
@@ -37,13 +46,32 @@ const userSlice = createSlice({
 		},
 		[registerUser.rejected]: (state, action) => {
 			state.isLoading = false;
-			toast.error(action.payload);
+			toast.error(action.payload, {
+				toastId: 'register-toast'
+			});
 		},
 		[registerUser.fulfilled]: (state, action) => {
 			const { user } = action.payload;
 			state.user = user;
 			state.isLoading = false;
+			addUserToLocalStorage(user);
 			toast.success('Successfully registered!');
+		},
+		[loginUser.pending]: state => {
+			state.isLoading = true;
+		},
+		[loginUser.rejected]: (state, action) => {
+			state.isLoading = false;
+			toast.error(action.payload);
+		},
+		[loginUser.fulfilled]: (state, action) => {
+			const { user } = action.payload;
+			state.user = user;
+			state.isLoading = false;
+			addUserToLocalStorage(user);
+			toast.success(`Welcome back ${user.name}!`, {
+				toastId: 'login-toast'
+			});
 		}
 	}
 });
