@@ -13,6 +13,9 @@ const initialState = {
 	user: getUserFromLocalStorage()
 };
 
+export const toggleSidebar = () => {};
+export const clearStore = () => {};
+
 export const registerUser = createAsyncThunk(
 	'user/registerUser',
 	async (user, thunkAPI) => {
