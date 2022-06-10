@@ -24,6 +24,10 @@ const Register = () => {
 		console.log(event.target);
 	};
 
+	const toggleMember = () => {
+		setValues({ ...values, isMember: !values.isMember });
+	};
+
 	return (
 		<Wrapper className='full-page'>
 			<form className='form' onSubmit={onSubmit}>
@@ -64,7 +68,7 @@ const Register = () => {
 				</button>
 				<p>
 					{values.isMember ? 'Not a member yet?' : 'Already a member?'}
-					<button type='button' className='member-btn'>
+					<button type='button' className='member-btn' onClick={toggleMember}>
 						{values.isMember ? 'Register' : 'Login'}
 					</button>
 				</p>
