@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
 import { Logo, FormRow } from '../components';
 import Wrapper from '../assets/wrappers/RegisterPage';
 
@@ -25,7 +26,13 @@ const Register = () => {
 		event.preventDefault();
 		const { name, email, password, isMember } = values;
 		if (!email || !password || (!isMember && !name)) {
-			console.error('Please fill out all fields');
+			//  TODO: show only one toast if press multiple times
+
+			toast.error('Please fill all fields', {
+				toastId: 'register-toast'
+			});
+
+			// toast.error('Please fill out all fields');
 			return;
 		}
 	};
