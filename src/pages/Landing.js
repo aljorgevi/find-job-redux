@@ -1,29 +1,31 @@
-import logo from '../assets/images/logo.svg';
+import Wrapper from '../assets/wrappers/LandingPage';
+import { Logo } from '../components';
 import main from '../assets/images/main.svg';
 
 const Landing = () => {
 	return (
-		<main>
+		<Wrapper>
 			<nav>
-				<img src={logo} alt='company logo' />
+				<Logo />
 			</nav>
 			<div className='container page'>
 				{/* info */}
 				<div className='info'>
 					<h1>
-						Job <span>tracking</span> app
+						job <span>tracking</span> app
 					</h1>
 					<p>
-						I'm baby flannel selfies chillwave taiyaki, forage plaid photo booth
-						thundercats tilde af lomo meggings 90's pickled vexillologist.
-						Distillery hashtag actually squid, man bun YOLO whatever sriracha
-						pok pok chicharrones synth tonx cornhole deep v ramps.
+						Crucifix narwhal street art asymmetrical, humblebrag tote bag pop-up
+						fixie raclette taxidermy craft beer. Brunch bitters synth, VHS
+						crucifix heirloom meggings bicycle rights.
 					</p>
-					<button className='btn btn-hero'>Login/Register</button>
+					<button to='/register' className='btn btn-hero'>
+						Login/Register
+					</button>
 				</div>
-				<img className='img main-img' src={main} alt='company couple' />
+				<img src={main} alt='job hunt' className='img main-img' />
 			</div>
-		</main>
+		</Wrapper>
 	);
 };
 
