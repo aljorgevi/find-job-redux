@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { Logo, FormRow } from '../components';
 import Wrapper from '../assets/wrappers/RegisterPage';
+import { loginUser, registerUser } from '../redux/features/user/userSlice';
 
 const initialState = {
 	name: '',
@@ -14,6 +16,8 @@ const isLoading = false;
 
 const Register = () => {
 	const [values, setValues] = useState(initialState);
+	const { user, isLoading } = useSelector(store => store.user);
+	const dispatch = useDispatch();
 
 	const handleChange = event => {
 		const name = event.target.name;
@@ -25,16 +29,20 @@ const Register = () => {
 	const onSubmit = event => {
 		event.preventDefault();
 		const { name, email, password, isMember } = values;
-		if (!email || !password || (!isMember && !name)) {
-			//  TODO: show only one toast if press multiple times
 
+		if (!email || !password || (!isMember && !name)) {
 			toast.error('Please fill all fields', {
 				toastId: 'register-toast'
 			});
-
-			// toast.error('Please fill out all fields');
 			return;
 		}
+
+		if (isMember) {
+			dispatch(loginUser({ email, password }));
+			return;
+		}
+
+		dispatch(registerUser({ name, email, password }));
 	};
 
 	const toggleMember = () => {
