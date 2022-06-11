@@ -30,7 +30,8 @@ const jobSlice = createSlice({
 	name: 'job',
 	initialState,
 	reducers: {
-		handleChange: (state, { payload: { name, value } }) => {
+		handleChange: (state, action) => {
+			const { name, value } = action.payload;
 			state[name] = value;
 		},
 		clearValues: () => {
@@ -39,8 +40,8 @@ const jobSlice = createSlice({
 				jobLocation: getUserFromLocalStorage()?.location || ''
 			};
 		},
-		setEditJob: (state, { payload }) => {
-			return { ...state, isEditing: true, ...payload };
+		setEditJob: (state, action) => {
+			return { ...state, isEditing: true, ...action.payload };
 		}
 	},
 	extraReducers: {
@@ -51,9 +52,9 @@ const jobSlice = createSlice({
 			state.isLoading = false;
 			toast.success('Job Created');
 		},
-		[createJob.rejected]: (state, { payload }) => {
+		[createJob.rejected]: (state, action) => {
 			state.isLoading = false;
-			toast.error(payload);
+			toast.error(action.payload);
 		},
 		// [deleteJob.fulfilled]: (state, { payload }) => {
 		// 	toast.success(payload);
@@ -68,9 +69,9 @@ const jobSlice = createSlice({
 			state.isLoading = false;
 			toast.success('Job Modified...');
 		},
-		[editJob.rejected]: (state, { payload }) => {
+		[editJob.rejected]: (state, action) => {
 			state.isLoading = false;
-			toast.error(payload);
+			toast.error(action.payload);
 		}
 	}
 });
