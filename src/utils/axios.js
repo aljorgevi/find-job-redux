@@ -1,10 +1,46 @@
 import axios from 'axios';
+import { getTokenFromLocalStorage } from './localStorage';
 // import { clearStore } from '../features/user/userSlice';
 // import { getUserFromLocalStorage } from './localStorage';
+/*
+import axios from 'axios';
+axios.defaults.baseURL = 'http://localhost:1010/'
+axios.defaults.headers.common = {'Authorization': `bearer ${token}`}
+export default axios;
+Some API require bearer to be written as Bearer, so you can do:
+
+axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
+*/
 
 const customFetch = axios.create({
-	baseURL: 'https://jobify-prod.herokuapp.com/api/v1/toolkit'
+	baseURL: 'https://jobify-prod.herokuapp.com/api/v1/toolkit',
+	headers: {
+		Authorization: `Bearer ${getTokenFromLocalStorage()}`
+	}
 });
+
+// export const fetchWithToken = (endpoint, data, method = 'GET') => {
+// 	const url = `${BASE_URL}/${endpoint}`;
+// 	const token = localStorage.getItem('token');
+// 	if (method === 'GET') {
+// 		return axios({
+// 			method,
+// 			url,
+// 			headers: {
+// 				Authorization: `Bearer ${token}`
+// 			}
+// 		});
+// 	} else {
+// 		return axios({
+// 			method,
+// 			url,
+// 			data,
+// 			headers: {
+// 				Authorization: `Bearer ${token}`
+// 			}
+// 		});
+// 	}
+// };
 
 // customFetch.interceptors.request.use(config => {
 // 	const user = getUserFromLocalStorage();
