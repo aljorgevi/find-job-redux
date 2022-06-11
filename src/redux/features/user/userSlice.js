@@ -41,7 +41,11 @@ const userSlice = createSlice({
 			state.user = null;
 			removeUserFromLocalStorage();
 		},
-		logout: state => {
+		logout: (state, action) => {
+			if (action.payload) {
+				toast.success(action.payload);
+			}
+
 			state.user = null;
 			state.isSidebarOpen = false;
 			removeUserFromLocalStorage();
