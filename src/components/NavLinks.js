@@ -9,6 +9,7 @@ const NavLinks = ({ toggleSidebar }) => {
 				return (
 					<NavLink
 						to={path}
+						// NavLink have a props where we can pass a function to get the active state
 						className={({ isActive }) => {
 							return isActive ? 'nav-link active' : 'nav-link';
 						}}
