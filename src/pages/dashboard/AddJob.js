@@ -6,6 +6,7 @@ import { handleChange, clearValues, createJob, editJob } from '../../redux/featu
 import Wrapper from '../../assets/wrappers/DashboardFormPage';
 
 const AddJob = () => {
+	const dispatch = useDispatch();
 	const {
 		isLoading,
 		position,
@@ -19,14 +20,15 @@ const AddJob = () => {
 		editJobId
 	} = useSelector(store => store.job);
 	const { user } = useSelector(store => store.user);
-	const dispatch = useDispatch();
-	const handleSubmit = e => {
-		e.preventDefault();
+
+	const handleSubmit = event => {
+		event.preventDefault();
 
 		if (!position || !company || !jobLocation) {
 			toast.error('Please fill out all fields');
 			return;
 		}
+
 		if (isEditing) {
 			dispatch(
 				editJob({
