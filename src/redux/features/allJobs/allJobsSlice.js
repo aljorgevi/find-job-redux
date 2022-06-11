@@ -51,15 +51,16 @@ const allJobsSlice = createSlice({
 		[getAllJobs.pending]: state => {
 			state.isLoading = true;
 		},
-		[getAllJobs.fulfilled]: (state, { payload }) => {
+		[getAllJobs.rejected]: (state, action) => {
 			state.isLoading = false;
-			state.jobs = payload.jobs;
-			state.numOfPages = payload.numOfPages;
-			state.totalJobs = payload.totalJobs;
+			toast.error(action.payload);
 		},
-		[getAllJobs.rejected]: (state, { payload }) => {
+		[getAllJobs.fulfilled]: (state, action) => {
+			const body = action.payload;
 			state.isLoading = false;
-			toast.error(payload);
+			state.jobs = body.jobs;
+			state.numOfPages = body.numOfPages;
+			state.totalJobs = body.totalJobs;
 		},
 		[showStats.pending]: state => {
 			state.isLoading = true;
