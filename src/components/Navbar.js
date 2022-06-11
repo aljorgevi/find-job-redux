@@ -10,14 +10,16 @@ const Navbar = () => {
 	const { user } = useSelector(store => store.user);
 	const dispatch = useDispatch();
 
-	const toggle = () => {
-		dispatch(toggleSidebar());
-	};
+	const toggleHandler = () => dispatch(toggleSidebar());
+
+	const logoutHandler = () => dispatch(clearStore('Logging out...'));
+
+	const toggleShowLogoutHandler = () => setShowLogout(!showLogout);
 
 	return (
 		<Wrapper>
 			<div className='nav-center'>
-				<button type='button' className='toggle-btn' onClick={toggle}>
+				<button type='button' className='toggle-btn' onClick={toggleHandler}>
 					<FaAlignLeft />
 				</button>
 				<div>
@@ -28,7 +30,7 @@ const Navbar = () => {
 					<button
 						type='button'
 						className='btn'
-						onClick={() => setShowLogout(!showLogout)}
+						onClick={toggleShowLogoutHandler}
 					>
 						<FaUserCircle />
 						{user?.name}
@@ -38,7 +40,7 @@ const Navbar = () => {
 						<button
 							type='button'
 							className='dropdown-btn'
-							onClick={() => dispatch(clearStore('Logging out...'))}
+							onClick={logoutHandler}
 						>
 							logout
 						</button>
