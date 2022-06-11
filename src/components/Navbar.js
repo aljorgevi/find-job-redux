@@ -1,9 +1,9 @@
-import Wrapper from '../assets/wrappers/Navbar';
-import { FaAlignLeft, FaUserCircle, FaCaretDown } from 'react-icons/fa';
-import Logo from './Logo';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { FaAlignLeft, FaUserCircle, FaCaretDown } from 'react-icons/fa';
 import { toggleSidebar, clearStore } from '../redux/features/user/userSlice';
+import Wrapper from '../assets/wrappers/Navbar';
+import Logo from './Logo';
 
 const Navbar = () => {
 	const [showLogout, setShowLogout] = useState(false);

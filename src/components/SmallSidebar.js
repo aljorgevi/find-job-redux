@@ -1,9 +1,9 @@
-import Wrapper from '../assets/wrappers/SmallSidebar';
-import { FaTimes } from 'react-icons/fa';
-import Logo from './Logo';
 import { useSelector, useDispatch } from 'react-redux';
+import { FaTimes } from 'react-icons/fa';
 import { toggleSidebar } from '../redux/features/user/userSlice';
+import Wrapper from '../assets/wrappers/SmallSidebar';
 import NavLinks from './NavLinks';
+import Logo from './Logo';
 
 const SmallSidebar = () => {
 	const { isSidebarOpen } = useSelector(store => store.user);
