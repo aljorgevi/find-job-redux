@@ -52,14 +52,10 @@ const AddJob = () => {
 
 	useEffect(() => {
 		if (!isEditing) {
-			dispatch(
-				handleChange({
-					name: 'jobLocation',
-					value: user.location
-				})
-			);
+			dispatch(handleChange({ name: 'jobLocation', value: user.location }));
 		}
-	}, [isEditing, user.location, dispatch]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return (
 		<Wrapper>
