@@ -2,9 +2,11 @@
 import { customFetch, checkForUnauthorizedResponse } from '../../../utils/axios';
 import { clearValues } from './jobSlice';
 
+const JOBS_URL = '/jobs';
+
 export const createJobThunk = async (job, thunkAPI) => {
 	try {
-		const resp = await customFetch.post('/jobs', job);
+		const resp = await customFetch.post(JOBS_URL, job);
 		thunkAPI.dispatch(clearValues());
 		return resp.data.msg;
 	} catch (error) {
