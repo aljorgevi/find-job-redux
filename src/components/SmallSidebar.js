@@ -9,9 +9,8 @@ const SmallSidebar = () => {
 	const { isSidebarOpen } = useSelector(store => store.user);
 	const dispatch = useDispatch();
 
-	const toggle = () => {
-		dispatch(toggleSidebar());
-	};
+	const toggleHandler = () => dispatch(toggleSidebar());
+
 	return (
 		<Wrapper>
 			<div
@@ -20,13 +19,13 @@ const SmallSidebar = () => {
 				}
 			>
 				<div className='content'>
-					<button className='close-btn' onClick={toggle}>
+					<button className='close-btn' onClick={toggleHandler}>
 						<FaTimes />
 					</button>
 					<header>
 						<Logo />
 					</header>
-					<NavLinks toggleSidebar={toggle} />
+					<NavLinks toggleSidebar={toggleHandler} />
 				</div>
 			</div>
 		</Wrapper>
