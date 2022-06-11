@@ -55,7 +55,7 @@ const AddJob = () => {
 				})
 			);
 		}
-	}, [dispatch]);
+	}, [isEditing, user.location, dispatch]);
 
 	return (
 		<Wrapper>
