@@ -48,6 +48,8 @@ const AddJob = () => {
 		dispatch(handleChange({ name, value }));
 	};
 
+	const handleClear = () => dispatch(clearValues());
+
 	useEffect(() => {
 		if (!isEditing) {
 			dispatch(
@@ -92,11 +94,7 @@ const AddJob = () => {
 						list={jobTypeOptions}
 					/>
 					<div className='btn-container'>
-						<button
-							type='button'
-							className='btn btn-block clear-btn'
-							onClick={() => dispatch(clearValues())}
-						>
+						<button type='button' className='btn btn-block clear-btn' onClick={handleClear}>
 							clear
 						</button>
 						<button

@@ -35,6 +35,7 @@ const jobSlice = createSlice({
 			state[name] = value;
 		},
 		clearValues: () => {
+			// IF RETURN  IS HERE, IT REPLACES THE STATE
 			return {
 				...initialState,
 				jobLocation: getUserFromLocalStorage()?.location || ''
