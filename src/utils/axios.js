@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { clearStore } from '../redux/features/user/userSlice';
 import { getTokenFromLocalStorage } from './localStorage';
 // import { clearStore } from '../features/user/userSlice';
 // import { getUserFromLocalStorage } from './localStorage';
@@ -12,7 +13,7 @@ Some API require bearer to be written as Bearer, so you can do:
 axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
 */
 
-const customFetch = axios.create({
+export const customFetch = axios.create({
 	baseURL: 'https://jobify-prod.herokuapp.com/api/v1/toolkit',
 	headers: {
 		Authorization: `Bearer ${getTokenFromLocalStorage()}`
@@ -50,12 +51,10 @@ const customFetch = axios.create({
 // 	return config;
 // });
 
-// export const checkForUnauthorizedResponse = (error, thunkAPI) => {
-// 	if (error.response.status === 401) {
-// 		thunkAPI.dispatch(clearStore());
-// 		return thunkAPI.rejectWithValue('Unauthorized! Logging Out...');
-// 	}
-// 	return thunkAPI.rejectWithValue(error.response.data.msg);
-// };
-
-export default customFetch;
+export const checkForUnauthorizedResponse = (error, thunkAPI) => {
+	if (error.response.status === 401) {
+		thunkAPI.dispatch(clearStore());
+		return thunkAPI.rejectWithValue('Unauthorized! Logging Out...');
+	}
+	return thunkAPI.rejectWithValue(error.response.data.msg);
+};
