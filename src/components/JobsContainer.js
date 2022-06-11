@@ -11,6 +11,10 @@ const JobsContainer = () => {
 	const { jobs, isLoading, page, totalJobs, numOfPages, search, searchStatus, searchType, sort } =
 		useSelector(store => store.allJobs);
 
+	useEffect(() => {
+		dispatch(getAllJobs());
+	}, [dispatch]);
+
 	if (isLoading) {
 		return <Loading center />;
 	}
