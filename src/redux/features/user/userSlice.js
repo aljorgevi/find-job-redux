@@ -1,6 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import customFetch from '../../../utils/axios';
+import {
+	loginUserThunk,
+	registerUserThunk,
+	updateUserThunk
+	// clearStoreThunk
+} from './userThunk';
 import {
 	addUserToLocalStorage,
 	getUserFromLocalStorage,
@@ -13,40 +18,16 @@ const initialState = {
 	user: getUserFromLocalStorage()
 };
 
-export const registerUser = createAsyncThunk(
-	'user/registerUser',
-	async (user, thunkAPI) => {
-		try {
-			const response = await customFetch.post('/auth/register', user);
-			return response.data;
-		} catch (error) {
-			return thunkAPI.rejectWithValue(error.response.data.msg);
-		}
-	}
+export const registerUser = createAsyncThunk('user/registerUser', (user, thunkAPI) =>
+	registerUserThunk(user, thunkAPI)
 );
 
-export const loginUser = createAsyncThunk(
-	'user/loginUser',
-	async (user, thunkAPI) => {
-		try {
-			const response = await customFetch.post('/auth/login', user);
-			return response.data;
-		} catch (error) {
-			return thunkAPI.rejectWithValue(error.response.data.msg);
-		}
-	}
+export const loginUser = createAsyncThunk('user/loginUser', (user, thunkAPI) =>
+	loginUserThunk(user, thunkAPI)
 );
 
-export const updateUser = createAsyncThunk(
-	'user/updateUser',
-	async (user, thunkAPI) => {
-		try {
-			const response = await customFetch.patch('/auth/updateUser', user);
-			return response.data;
-		} catch (error) {
-			return thunkAPI.rejectWithValue(error.response.data.msg);
-		}
-	}
+export const updateUser = createAsyncThunk('user/updateUser', (user, thunkAPI) =>
+	updateUserThunk(user, thunkAPI)
 );
 
 const userSlice = createSlice({
@@ -107,6 +88,7 @@ const userSlice = createSlice({
 			toast.error(action.payload);
 		},
 		[updateUser.fulfilled]: (state, action) => {
+			console.log({ action });
 			const { user } = action.payload;
 
 			state.isLoading = false;

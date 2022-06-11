@@ -24,6 +24,7 @@ const Profile = () => {
 			toast.error('please fill out all fields');
 			return;
 		}
+		console.log('clicked');
 
 		dispatch(updateUser(userData));
 	};
@@ -40,12 +41,7 @@ const Profile = () => {
 			<form className='form' onSubmit={handleSubmit}>
 				<h3>profile</h3>
 				<div className='form-center'>
-					<FormRow
-						type='text'
-						name='name'
-						value={userData.name}
-						handleChange={handleChange}
-					/>
+					<FormRow type='text' name='name' value={userData.name} handleChange={handleChange} />
 					<FormRow
 						type='text'
 						labelText='last name'
@@ -53,12 +49,7 @@ const Profile = () => {
 						value={userData.lastName}
 						handleChange={handleChange}
 					/>
-					<FormRow
-						type='email'
-						name='email'
-						value={userData.email}
-						handleChange={handleChange}
-					/>
+					<FormRow type='email' name='email' value={userData.email} handleChange={handleChange} />
 					<FormRow
 						type='text'
 						name='location'

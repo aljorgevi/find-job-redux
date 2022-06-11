@@ -13,8 +13,6 @@ const initialState = {
 	isMember: true
 };
 
-const isLoading = false;
-
 const Register = () => {
 	const [values, setValues] = useState(initialState);
 	const { user, isLoading } = useSelector(store => store.user);
@@ -66,20 +64,10 @@ const Register = () => {
 				<h3>{values.isMember ? 'Login' : 'Register'}</h3>
 				{/* name field */}
 				{!values.isMember && (
-					<FormRow
-						type='text'
-						name='name'
-						value={values.name}
-						handleChange={handleChange}
-					/>
+					<FormRow type='text' name='name' value={values.name} handleChange={handleChange} />
 				)}
 				{/* email field */}
-				<FormRow
-					type='email'
-					name='email'
-					value={values.email}
-					handleChange={handleChange}
-				/>
+				<FormRow type='email' name='email' value={values.email} handleChange={handleChange} />
 				{/* password field */}
 				<FormRow
 					type='password'
@@ -90,11 +78,7 @@ const Register = () => {
 				<button type='submit' className='btn btn-block' disabled={isLoading}>
 					{isLoading ? 'loading...' : 'submit'}
 				</button>
-				<button
-					type='button'
-					className='btn btn-block btn-hipster'
-					disabled={isLoading}
-				>
+				<button type='button' className='btn btn-block btn-hipster' disabled={isLoading}>
 					{isLoading ? 'loading...' : 'demo app'}
 				</button>
 				<p>
