@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { clearStore } from '../redux/features/user/userSlice';
-import { getTokenFromLocalStorage } from './localStorage';
+import { getUserFromLocalStorage } from './localStorage';
 // import { clearStore } from '../features/user/userSlice';
 // import { getUserFromLocalStorage } from './localStorage';
 /*
@@ -14,10 +14,15 @@ axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
 */
 
 export const customFetch = axios.create({
-	baseURL: 'https://jobify-prod.herokuapp.com/api/v1/toolkit',
-	headers: {
-		Authorization: `Bearer ${getTokenFromLocalStorage()}`
+	baseURL: 'https://jobify-prod.herokuapp.com/api/v1/toolkit'
+});
+
+customFetch.interceptors.request.use(config => {
+	const user = getUserFromLocalStorage();
+	if (user) {
+		config.headers.common['Authorization'] = `Bearer ${user.token}`;
 	}
+	return config;
 });
 
 // export const fetchWithToken = (endpoint, data, method = 'GET') => {
@@ -52,6 +57,7 @@ export const customFetch = axios.create({
 // });
 
 export const checkForUnauthorizedResponse = (error, thunkAPI) => {
+	console.log({ error });
 	if (error.response.status === 401) {
 		thunkAPI.dispatch(clearStore());
 		return thunkAPI.rejectWithValue('Unauthorized! Logging Out...');
