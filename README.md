@@ -3,6 +3,7 @@
 - We could add a description to the job like in a modal for example with a button. than can be object itselft, like salary, requerimients, description, etc.
 - we could add the date that the user select, instead of the default date which is the current date.
 - For search we could use algolia for example to look for jobs descriptions, etc
+- the createdAt could be at right bottom in small letters.. to show where the job was added.
 
 #### 24) HTTP Methods
 
