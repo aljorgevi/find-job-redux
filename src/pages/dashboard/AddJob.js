@@ -25,19 +25,18 @@ const AddJob = () => {
 		event.preventDefault();
 
 		if (!position || !company || !jobLocation) {
-			toast.error('Please fill out all fields');
-			return;
+			return toast.error('Please fill out all fields');
 		}
 
 		if (isEditing) {
-			dispatch(
-				editJob({
-					jobId: editJobId,
-					job: { position, company, jobLocation, jobType, status }
-				})
-			);
-			return;
+			const editedJob = {
+				jobId: editJobId,
+				job: { position, company, jobLocation, jobType, status }
+			};
+
+			return dispatch(editJob(editedJob));
 		}
+
 		dispatch(createJob({ position, company, jobLocation, jobType, status }));
 	};
 

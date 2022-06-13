@@ -26,7 +26,8 @@ export const deleteJobThunk = async (jobId, thunkAPI) => {
 	}
 };
 
-export const editJobThunk = async ({ jobId, job }, thunkAPI) => {
+export const editJobThunk = async (editedJob, thunkAPI) => {
+	const { jobId, job } = editedJob;
 	try {
 		const resp = await customFetch.patch(`${JOBS_URL}/${jobId}`, job);
 		thunkAPI.dispatch(clearValues());
