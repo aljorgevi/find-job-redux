@@ -5,6 +5,7 @@
 - For search we could use algolia for example to look for jobs descriptions, etc
 - the createdAt could be at right bottom in small letters.. to show where the job was added.
 - ADD A MESSAGE LIKE A MODAL WHEN THE USER LOGIN WITH TEST USER SAYING IS READ ONLY AND is not going be able to add jobs, etc
+- the fact you can choose between differents chart is not very clear, see can I can do about it. in the stats page, below monthly applications
 
 #### 24) HTTP Methods
 
