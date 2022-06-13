@@ -4,6 +4,7 @@
 - we could add the date that the user select, instead of the default date which is the current date.
 - For search we could use algolia for example to look for jobs descriptions, etc
 - the createdAt could be at right bottom in small letters.. to show where the job was added.
+- ADD A MESSAGE LIKE A MODAL WHEN THE USER LOGIN WITH TEST USER SAYING IS READ ONLY AND is not going be able to add jobs, etc
 
 #### 24) HTTP Methods
 
