@@ -49,6 +49,9 @@ const Register = () => {
 		setValues({ ...values, isMember: !values.isMember });
 	};
 
+	const testUserLoginHandler = () =>
+		dispatch(loginUser({ email: 'testUser@test.com', password: 'secret' }));
+
 	useEffect(() => {
 		if (user) {
 			setTimeout(() => {
@@ -78,7 +81,12 @@ const Register = () => {
 				<button type='submit' className='btn btn-block' disabled={isLoading}>
 					{isLoading ? 'loading...' : 'submit'}
 				</button>
-				<button type='button' className='btn btn-block btn-hipster' disabled={isLoading}>
+				<button
+					type='button'
+					className='btn btn-block btn-hipster'
+					disabled={isLoading}
+					onClick={testUserLoginHandler}
+				>
 					{isLoading ? 'loading...' : 'demo app'}
 				</button>
 				<p>
