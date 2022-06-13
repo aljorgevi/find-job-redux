@@ -11,6 +11,20 @@ const Job = ({ _id, position, company, jobLocation, jobType, createdAt, status }
 
 	const date = moment(createdAt).format('MMM Do, YYYY');
 
+	const deleteJobHandler = () => dispatch(deleteJob(_id));
+
+	const editJobHandler = () =>
+		dispatch(
+			setEditJob({
+				editJobId: _id,
+				position,
+				company,
+				jobLocation,
+				jobType,
+				status
+			})
+		);
+
 	return (
 		<Wrapper>
 			<header>
@@ -29,29 +43,10 @@ const Job = ({ _id, position, company, jobLocation, jobType, createdAt, status }
 				</div>
 				<footer>
 					<div className='actions'>
-						<Link
-							to='/add-job'
-							className='btn edit-btn'
-							onClick={() =>
-								dispatch(
-									setEditJob({
-										editJobId: _id,
-										position,
-										company,
-										jobLocation,
-										jobType,
-										status
-									})
-								)
-							}
-						>
+						<Link to='/add-job' className='btn edit-btn' onClick={editJobHandler}>
 							Edit
 						</Link>
-						<button
-							type='button'
-							className='btn delete-btn'
-							onClick={() => dispatch(deleteJob(_id))}
-						>
+						<button type='button' className='btn delete-btn' onClick={deleteJobHandler}>
 							delete
 						</button>
 					</div>

@@ -17,7 +17,7 @@ export const createJobThunk = async (job, thunkAPI) => {
 export const deleteJobThunk = async (jobId, thunkAPI) => {
 	thunkAPI.dispatch(showLoading());
 	try {
-		const resp = await customFetch.delete(`/jobs/${jobId}`);
+		const resp = await customFetch.delete(`${JOBS_URL}/${jobId}`);
 		thunkAPI.dispatch(getAllJobs());
 		return resp.data.msg;
 	} catch (error) {
@@ -28,7 +28,7 @@ export const deleteJobThunk = async (jobId, thunkAPI) => {
 
 export const editJobThunk = async ({ jobId, job }, thunkAPI) => {
 	try {
-		const resp = await customFetch.patch(`/jobs/${jobId}`, job);
+		const resp = await customFetch.patch(`${JOBS_URL}/${jobId}`, job);
 		thunkAPI.dispatch(clearValues());
 		return resp.data;
 	} catch (error) {

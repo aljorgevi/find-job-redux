@@ -53,12 +53,12 @@ const jobSlice = createSlice({
 			state.isLoading = false;
 			toast.error(action.payload);
 		},
-		// [deleteJob.fulfilled]: (state, { payload }) => {
-		// 	toast.success(payload);
-		// },
-		// [deleteJob.rejected]: (state, { payload }) => {
-		// 	toast.error(payload);
-		// },
+		[deleteJob.rejected]: (_, { payload }) => {
+			toast.error(payload);
+		},
+		[deleteJob.fulfilled]: (_, { payload }) => {
+			toast.success(payload);
+		},
 		[editJob.pending]: state => {
 			state.isLoading = true;
 		},
