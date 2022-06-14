@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { clearStore } from '../redux/features/user/userSlice';
+import { clearApplication } from '../redux/features/user/userSlice';
 import { getUserFromLocalStorage } from './localStorage';
 // import { clearStore } from '../features/user/userSlice';
 // import { getUserFromLocalStorage } from './localStorage';
@@ -59,7 +59,7 @@ customFetch.interceptors.request.use(config => {
 export const checkForUnauthorizedResponse = (error, thunkAPI) => {
 	console.log({ error });
 	if (error.response.status === 401) {
-		thunkAPI.dispatch(clearStore());
+		thunkAPI.dispatch(clearApplication());
 		return thunkAPI.rejectWithValue('Unauthorized! Logging Out...');
 	}
 	return thunkAPI.rejectWithValue(error.response.data.msg);
