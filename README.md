@@ -6,6 +6,7 @@
 - the createdAt could be at right bottom in small letters.. to show where the job was added.
 - ADD A MESSAGE LIKE A MODAL WHEN THE USER LOGIN WITH TEST USER SAYING IS READ ONLY AND is not going be able to add jobs, etc
 - the fact you can choose between differents chart is not very clear, see can I can do about it. in the stats page, below monthly applications
+- ADD A MEANINFUL DESCRIPTION OF THE APP THE LANDING
 
 #### 24) HTTP Methods
 
