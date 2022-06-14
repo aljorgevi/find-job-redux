@@ -4,8 +4,8 @@ import { changePage } from '../redux/features/allJobs/allJobsSlice';
 import Wrapper from '../assets/wrappers/PageBtnContainer';
 
 const PageBtnContainer = () => {
-	const { numOfPages, page } = useSelector(store => store.allJobs);
 	const dispatch = useDispatch();
+	const { numOfPages, page } = useSelector(store => store.allJobs);
 
 	const pages = Array.from({ length: numOfPages }, (_, index) => {
 		return index + 1;
@@ -18,6 +18,7 @@ const PageBtnContainer = () => {
 		}
 		dispatch(changePage(newPage));
 	};
+
 	const prevPage = () => {
 		let newPage = page - 1;
 		if (newPage < 1) {
@@ -25,6 +26,8 @@ const PageBtnContainer = () => {
 		}
 		dispatch(changePage(newPage));
 	};
+
+	const changePageHandler = pageNumber => dispatch(changePage(pageNumber));
 
 	return (
 		<Wrapper>
@@ -39,7 +42,7 @@ const PageBtnContainer = () => {
 							type='button'
 							key={pageNumber}
 							className={pageNumber === page ? 'pageBtn active' : 'pageBtn'}
-							onClick={() => dispatch(changePage(pageNumber))}
+							onClick={() => changePageHandler(pageNumber)}
 						>
 							{pageNumber}
 						</button>
