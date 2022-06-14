@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import Job from './Job';
-import Wrapper from '../assets/wrappers/JobsContainer';
-import Loading from './Loading';
 import { getAllJobs } from '../redux/features/allJobs/allJobsSlice';
-// import PageBtnContainer from './PageBtnContainer';
+import Job from './Job';
+import PageBtnContainer from './PageBtnContainer';
+import Loading from './Loading';
+import Wrapper from '../assets/wrappers/JobsContainer';
 
 const JobsContainer = () => {
 	const dispatch = useDispatch();
@@ -37,7 +37,7 @@ const JobsContainer = () => {
 					return <Job key={job._id} {...job} />;
 				})}
 			</div>
-			{numOfPages > 1 && <span>PageBtnContainer...</span>}
+			{numOfPages > 1 && <PageBtnContainer />}
 		</Wrapper>
 	);
 };
